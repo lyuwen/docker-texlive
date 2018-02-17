@@ -1,7 +1,5 @@
 sudo: required
 
-dist: xenial
-
 services:
   - docker
 
@@ -11,6 +9,12 @@ env:
   - secure: YMxJ3e5QGOKx2hC9AGaeyZ0Vz8Yy+vDdu0hfLGlLeZeWJZNFl+P9VviLSwAuN6qrXA4whr50A4B+vKtlRa+OiZx12JINEa7gJlqcwh/IkYX/xaOS89bcm0CIv/DXTC6Q+zkfiyowPjbqwrlh2SRcfTiEY+zOylDeHarMZNeAVx2XSPUEkjjfkRC7VKCTCCfg8ZrTUS41xxfwVzL4pnHuJyp0l3EBTKofnnvA2CkAetWV6Od6H14BH6jE91QnOAPqNN7Gv7aGMLVXf5Xc3ZDlr2HbLvc1thHn+nwTxbV7AgNHpsq2+X4H960bdJvHvxH8LWedYM1lYRM+Y8OU10Z8GSebJmqgUyjceWPaR1GpvDLMe36utHI0seMxaaSxRAD7EZDe1TG7o4jBAViNShu//aeSbVMzTvPi6aPri7UKeE/w1G5jVs0cl+RrAqgY4LzxbuHVlCCA4IfxDdhCa72/Pcc2sYKmhxKsM1TCc9AQA1NDM0SyhoUE8KvblwuOUvj9qgn/62Bgbjx+fHecQmlvtm8aoiwN9Jj9LTkahQwwGnjrc1/8tfqyE0as/h5jDS+IiVnNnLSTqld6MCPkss6Cox21ylarTnv6r0groogY9K2Hywo5RSHSpQI4E2Cy+pWxVdhO/4rkvsYTatVwvKTgPkzk/QsgvQv9T9wx6AptHHc=
   - secure: kcDhcHkoQjm9ttlq7dnf7unCSlQgcRp2jutsarsZxMoblmKmkxah7e9OyglR5iA+l/Gwu+TUbK9JEoYLP2w/AF7esWjwV94vTGB76rD0NnbvTFD79ZcETdk0bkjKrVYos76OqW4/WyLcYLVBCpkNO0VOFL88xOVLKv+E4FDKQMM+W7irX7Z40c7dQys7iCQXlO+DLSy5mggzBPj9KNmba6SXiX1DlZdqfj70Ybv9ruPbBMSQcC1am+ANJsnZbNA3KM2VfPW5H+vm/fJ+dSUgXYb+K6YoMkZyKy3bISPCp49yJbi7OWnTxOwdwl4JI9tHfLn+CcdCgVPcijC9/4tI2/OT3jXgHktvtRRhfGi2oH7PSuPUAgtQZFZZhQOAYDMjSVloRNPo52Fs1tA8KAcTU00gaI7OcxNslMSVX6P2x7dLRTy9ZpSjNAzlOQvmEREcklKGgoViEHWzQjLsS8dkSav0ZR2oqHwpKk6k3YAN1hURVWpDN7+Z8UnrHEeLrPWurASGeUNRYLjHOugy2JXElTMJWYHdts4r60bvFhOzCFn/1VJYH/qJPMvW+PEeQE5DWW+J8mcjYIqkmGCmKE8PwNuke0p8rIBtusGagSISKNB0YRm4uDNhwyoL93dC3vtevb0RwA1GpkLDE63IejZAzYJ7EmOcJfaHhCctCWn+JuE=
   - COMMIT=${TRAVIS_COMMIT::8}
+
+install:
+  - echo "install nothing!" # put your normal pre-testing installs here
+
+script:
+  - echo "no tests!" # put your normal testing scripts here
 
 after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
