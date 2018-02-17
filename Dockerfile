@@ -7,12 +7,13 @@ RUN apt-get update
 RUN apt-get install -y git wget scons
 
 RUN git clone https://github.com/lyuwen/install-tl-ubuntu.git
-RUN cd install-tl-ubuntu && bash install-tl-ubuntu --scheme 'scheme-small'
+RUN cd install-tl-ubuntu && bash install-tl-ubuntu --scheme 'scheme-full'
 ENV PATH=/opt/texbin:${PATH}
 RUN mkdir /workspace
 WORKDIR /workspace
 
-
 RUN tlmgr update --all
-RUN tlmgr install latexmk
-RUN tlmgr list | grep tikz | cut -d':' -f1 | xargs tlmgr install
+# RUN tlmgr install latexmk
+# RUN tlmgr list | grep tikz | cut -d':' -f1 | xargs tlmgr install
+# RUN tlmgr install standalone
+# RUN tlmgr install arrayjobx epstopdf

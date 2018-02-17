@@ -1,0 +1,20 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  global:
+  - secure: H9hg9U668BraMXhyL+Z6bF9Pu8aT/fDenLYfJa1LBSfyp0pMhe7xM0VD1Rb2Cml4FAtPspTeBybLUJ7f6Ns1xx94bL75Yv+y8HFCSzNfSPoIHvBfFKSQv7wGW8beQo7zqk90vKx3xdyCnaw3GKJv9rN7SH9oCXKMZThAU7l8Jo1cop0MyHFZBwAzmhfrhmEyC10o8+9sw9XURcLd3WSTJqYIwkmA/svyUzDzXgHNoNCE76iFsY1xEJP1nVG8cnIxX4ut9q7tNZsgR1fT/LJ7FZ3u6AHx2PQRyleJB98yJx3rOKaMzOLp40zBnL1SkMSchSi29wW1NpdtOixuKtiwOpZ98qXtO1qrzvSP6ipjrGSBExzs5JDlq0cXCfhe6pTybOP17AyUawHGpSFFhvGx4QI2Mp5DE2W5dTpshPNX4ojMyOgHY/mwj2SBwKKoaQFuTchNHUWZtxPz8i+UpGrbnM/+UllqKoPatkFXrxT5eivNEsJ2FrhC2DfFTsUrf5XVzIWezuML4KilBtCaAYZZ1NYpKyvjuYiIuFr5tp9XAEE5dc+bVakyDArlwCXavKzArZzztz83GWnA7YGjmgiIrOeFaZATgY96jSCZ9e10F0nAajEZyz7rxDL7T0WWC5LWFxMGj5GZZRnPx70ANs65I+9jLIysBLxnLIbmDVhmuCY=
+  - secure: YMxJ3e5QGOKx2hC9AGaeyZ0Vz8Yy+vDdu0hfLGlLeZeWJZNFl+P9VviLSwAuN6qrXA4whr50A4B+vKtlRa+OiZx12JINEa7gJlqcwh/IkYX/xaOS89bcm0CIv/DXTC6Q+zkfiyowPjbqwrlh2SRcfTiEY+zOylDeHarMZNeAVx2XSPUEkjjfkRC7VKCTCCfg8ZrTUS41xxfwVzL4pnHuJyp0l3EBTKofnnvA2CkAetWV6Od6H14BH6jE91QnOAPqNN7Gv7aGMLVXf5Xc3ZDlr2HbLvc1thHn+nwTxbV7AgNHpsq2+X4H960bdJvHvxH8LWedYM1lYRM+Y8OU10Z8GSebJmqgUyjceWPaR1GpvDLMe36utHI0seMxaaSxRAD7EZDe1TG7o4jBAViNShu//aeSbVMzTvPi6aPri7UKeE/w1G5jVs0cl+RrAqgY4LzxbuHVlCCA4IfxDdhCa72/Pcc2sYKmhxKsM1TCc9AQA1NDM0SyhoUE8KvblwuOUvj9qgn/62Bgbjx+fHecQmlvtm8aoiwN9Jj9LTkahQwwGnjrc1/8tfqyE0as/h5jDS+IiVnNnLSTqld6MCPkss6Cox21ylarTnv6r0groogY9K2Hywo5RSHSpQI4E2Cy+pWxVdhO/4rkvsYTatVwvKTgPkzk/QsgvQv9T9wx6AptHHc=
+  - secure: kcDhcHkoQjm9ttlq7dnf7unCSlQgcRp2jutsarsZxMoblmKmkxah7e9OyglR5iA+l/Gwu+TUbK9JEoYLP2w/AF7esWjwV94vTGB76rD0NnbvTFD79ZcETdk0bkjKrVYos76OqW4/WyLcYLVBCpkNO0VOFL88xOVLKv+E4FDKQMM+W7irX7Z40c7dQys7iCQXlO+DLSy5mggzBPj9KNmba6SXiX1DlZdqfj70Ybv9ruPbBMSQcC1am+ANJsnZbNA3KM2VfPW5H+vm/fJ+dSUgXYb+K6YoMkZyKy3bISPCp49yJbi7OWnTxOwdwl4JI9tHfLn+CcdCgVPcijC9/4tI2/OT3jXgHktvtRRhfGi2oH7PSuPUAgtQZFZZhQOAYDMjSVloRNPo52Fs1tA8KAcTU00gaI7OcxNslMSVX6P2x7dLRTy9ZpSjNAzlOQvmEREcklKGgoViEHWzQjLsS8dkSav0ZR2oqHwpKk6k3YAN1hURVWpDN7+Z8UnrHEeLrPWurASGeUNRYLjHOugy2JXElTMJWYHdts4r60bvFhOzCFn/1VJYH/qJPMvW+PEeQE5DWW+J8mcjYIqkmGCmKE8PwNuke0p8rIBtusGagSISKNB0YRm4uDNhwyoL93dC3vtevb0RwA1GpkLDE63IejZAzYJ7EmOcJfaHhCctCWn+JuE=
+  - COMMIT=${TRAVIS_COMMIT::8}
+
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=fulvwen/texlive
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
