@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt-get install -y git wget scons
 
 RUN git clone https://github.com/lyuwen/install-tl-ubuntu.git
-RUN cd install-tl-ubuntu && bash install-tl-ubuntu --scheme 'scheme-full'
+RUN cd install-tl-ubuntu && bash install-tl-ubuntu --profile example.profile
 ENV PATH=/opt/texbin:${PATH}
 RUN mkdir /workspace
 WORKDIR /workspace
