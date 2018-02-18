@@ -1,6 +1,6 @@
 # A LaTeX Docker image
 
-A docker image contains a small installation of texlive.
+A docker image contains a custome installation of texlive.
 
 ## TeX
 
@@ -9,6 +9,12 @@ a fork of original [*scottkosty/install-tl-ubuntu*](https://github.com/scottkost
 the ability to choose installation scheme.
 
 ## Usage
+
+Obtain the docker image
+
+```bash
+sudo docker pull fulvwen/texlive
+```
 
 Let's say you want to compile the file main.tex under you current work path.
 
@@ -22,4 +28,10 @@ The container also support scons.
 sudo docker run -ti -v ${PWD}:/workspace fulvwen/texlive  scons
 ```
 
-The container has the small installation scheme in addition to tikz packages and latexmk.
+The container has the custome installation scheme in addition including tikz and standalone packages.
+
+## Build the docker on your own
+
+```bash
+sudo docker build -t texlive .
+```

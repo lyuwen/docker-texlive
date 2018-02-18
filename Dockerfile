@@ -15,5 +15,5 @@ WORKDIR /workspace
 RUN tlmgr update --all
 # RUN tlmgr install latexmk
 # RUN tlmgr list | grep tikz | cut -d':' -f1 | xargs tlmgr install
- RUN tlmgr install standalone
+# RUN tlmgr install standalone
 # RUN tlmgr install arrayjobx epstopdf
