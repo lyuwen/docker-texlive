@@ -28,7 +28,7 @@ COPY texlive.profile /home/$NB_USER/texlive.profile
 RUN git clone https://github.com/lyuwen/install-tl-ubuntu.git && \
     cd install-tl-ubuntu && \
     sudo apt-get update && \
-    sudo bash install-tl-ubuntu --profile ${PWD}/example.profile \
+    sudo bash install-tl-ubuntu --profile /home/$NB_USER/texlive.profile \
     && sudo rm -rf /var/lib/apt/lists/*
 
 ENV PATH=/opt/texbin:${PATH}
