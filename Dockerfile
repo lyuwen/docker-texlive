@@ -32,8 +32,8 @@ RUN git clone https://github.com/lyuwen/install-tl-ubuntu.git && \
     && sudo rm -rf /var/lib/apt/lists/*
 
 ENV PATH=/opt/texbin:${PATH}
-RUN mkdir /home/$NB_USER/workspace
-WORKDIR /home/$NB_USER/workspace
+RUN sudo mkdir /workspace && sudo chown $NB_USER:$NB_USER /workspace
+WORKDIR /workspace
 
 # RUN tlmgr update --all
 # RUN tlmgr install latexmk
