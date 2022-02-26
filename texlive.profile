@@ -28,6 +28,7 @@ collection-metapost 1
 collection-pictures 1
 collection-plaingeneric 1
 collection-publishers 1
+collection-langchinese 1
 instopt_adjustpath 0
 instopt_adjustrepo 1
 instopt_letter 0
